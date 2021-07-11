@@ -1,0 +1,101 @@
+PS C:\privat\xampp\htdocs> mkdir 85_photo-gallery
+
+    Directory: C:\privat\xampp\htdocs
+
+
+Mode                LastWriteTime         Length Name                                                                                                                                                                                                                                                       
+----                -------------         ------ ----                                                                                                                                                                                                                                                       
+d-----       10/06/2021     19:59                85_photo-gallery                                                                                                                                                                                                                                           
+
+
+
+PS C:\privat\xampp\htdocs\85_photo-gallery> npx create-react-app . --template typescript
+npx: installed 67 in 7.949s
+
+Creating a new React app in C:\privat\xampp\htdocs\85_photo-gallery.
+
+Installing packages. This might take a couple of minutes.
+Installing react, react-dom, and react-scripts with cra-template-typescript...
+
+
+added 1919 packages, and audited 1920 packages in 2m
+
+145 packages are looking for funding
+  run `npm fund` for details
+
+96 vulnerabilities (85 moderate, 11 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+
+Installing template dependencies using npm...
+
+added 37 packages, changed 1 package, and audited 1957 packages in 11s
+
+145 packages are looking for funding
+  run `npm fund` for details
+
+96 vulnerabilities (85 moderate, 11 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+We detected TypeScript in your project (src\App.test.tsx) and created a tsconfig.json file for you.
+
+Your tsconfig.json has been populated with default values.
+
+Removing template package using npm...
+
+
+removed 1 package, and audited 1956 packages in 7s
+
+145 packages are looking for funding
+  run `npm fund` for details
+
+96 vulnerabilities (85 moderate, 11 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+Success! Created 85_photo-gallery at C:\privat\xampp\htdocs\85_photo-gallery
+Inside that directory, you can run several commands:
+
+  npm start
+    Starts the development server.
+
+  npm run build
+    Bundles the app into static files for production.
+
+  npm test
+    Starts the test runner.
+
+  npm run eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+
+We suggest that you begin by typing:
+
+  cd C:\privat\xampp\htdocs\85_photo-gallery
+  npm start
+
+Happy hacking!
+PS C:\privat\xampp\htdocs\85_photo-gallery>
+
+// fontAwesome
+npm i --save @fortawesome/fontawesome-svg-core
+npm install --save @fortawesome/free-solid-svg-icons
+npm install --save @fortawesome/react-fontawesome
+
+// gitHub

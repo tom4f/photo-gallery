@@ -1,0 +1,11 @@
+.imgs {
+    display: flex;
+    justify-content: center;
+}
+
+.imgs > div {
+    width: 12.5%;
+    margin: 1px;
+    height: 75px;
+    background-size: cover;
+}
