@@ -1,4 +1,4 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react'
+import { useState, useEffect } from 'react'
 import { imgFolder } from './api/read'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentMedical, faCommentSlash, faArrowLeft, faArrowRight, faAngleDoubleLeft, faPlayCircle,
@@ -12,7 +12,7 @@ type imgPositionType = { smallImgStart: number; smallImgsSize: number; current: 
 interface eightPhotoTypes {
     bigPhoto       : photoType;
     imgPosition    : imgPositionType;
-    setImgPosition : Dispatch<SetStateAction<imgPositionType>>;
+    setImgPosition : React.Dispatch<React.SetStateAction<imgPositionType>>;
     categoryObj    : any;
     length         : number;
 }

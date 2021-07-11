@@ -6,15 +6,10 @@ import { BigImage } from './BigImage'
 
 export default function App() {
 
-  const [ allPhoto, setAllPhoto ] = useState([])
-  const [ imgPosition, setImgPosition ] = useState({
-      smallImgStart: 0,
-      smallImgsSize: 8,
-      current: 0,
-      category: 99999
-  })
+  const [ allPhoto, setAllPhoto ]       = useState([])
+  const [ imgPosition, setImgPosition ] = useState({ smallImgStart: 0, smallImgsSize: 8, current: 0, category: 99999 })
 
-  useEffect( () => { ( async() => setAllPhoto( await loadPicturesfromMySQL() ) )() }, [])
+  useEffect( () => { ( async() => setAllPhoto( await loadPicturesfromMySQL ) )() }, [])
 
   const arrIndexFromImgId = (clickedImgId:number):number => filteredPhoto.findIndex( img => +img['id'] === clickedImgId )
 
@@ -22,15 +17,7 @@ export default function App() {
                       ? allPhoto
                       : allPhoto.filter( one => +one['typ'] === imgPosition.category )
 
-  const eightPhoto = () => {
-  //   if ( imgPosition.current >= 0 && imgPosition.current < filteredPhoto.length)  {
-  //     setImgPosition( (old) => {
-  //         const newSmallImgStart =  imgPosition.current - imgPosition.current % imgPosition.smallImgsSize
-  //         return ({ ...old, smallImgStart: newSmallImgStart })
-  //     })
-  // }
-    return filteredPhoto.slice(imgPosition.smallImgStart, imgPosition.smallImgStart + imgPosition.smallImgsSize)
-  }
+  const eightPhoto = filteredPhoto.slice(imgPosition.smallImgStart, imgPosition.smallImgStart + imgPosition.smallImgsSize)
   
   const categoryObj = () => {
     const reducer = (sumPerCat: {[key: number]: number}, oneEntry: {[key: string]: number}) => {
@@ -48,7 +35,7 @@ export default function App() {
   return (
     <div className="container">
       <SmallImages imgPosition={imgPosition} setImgPosition={setImgPosition}
-                   eightPhoto={ eightPhoto() } arrIndexFromImgId={arrIndexFromImgId} />
+                   eightPhoto={ eightPhoto } arrIndexFromImgId={arrIndexFromImgId} />
 
       <BigImage imgPosition={imgPosition} setImgPosition={setImgPosition}
                 bigPhoto={ filteredPhoto[imgPosition.current] }

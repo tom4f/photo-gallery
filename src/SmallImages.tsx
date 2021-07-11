@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import { imgFolder } from './api/read'
 import './css/SmallImages.css'
 
@@ -9,7 +8,7 @@ interface SmallImagesTypes {
     eightPhoto        : null | Array<photoType>;
     arrIndexFromImgId : (clickedId:number) => number;
     imgPosition       : imgPositionType;
-    setImgPosition    : Dispatch<SetStateAction<imgPositionType>>;
+    setImgPosition    : React.Dispatch<React.SetStateAction<imgPositionType>>;
 }
 
 export const SmallImages = ( { eightPhoto, arrIndexFromImgId, imgPosition, setImgPosition }: SmallImagesTypes ) => {
