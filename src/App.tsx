@@ -3,10 +3,11 @@ import './css/App.css';
 import { loadPicturesfromMySQL } from './api/read'
 import { SmallImages } from './SmallImages'
 import { BigImage } from './BigImage'
+import { photoType, categoryObjType } from './TypeDefinition';
 
 export default function App() {
 
-  const [ allPhoto, setAllPhoto ]       = useState([])
+  const [ allPhoto, setAllPhoto ]       = useState<photoType[]>([])
   const [ imgPosition, setImgPosition ] = useState({ smallImgStart: 0, smallImgsSize: 8, current: 0, category: 99999 })
 
   useEffect( () => { ( async() => setAllPhoto( await loadPicturesfromMySQL ) )() }, [])
@@ -20,9 +21,9 @@ export default function App() {
   const eightPhoto = filteredPhoto.slice(imgPosition.smallImgStart, imgPosition.smallImgStart + imgPosition.smallImgsSize)
   
   const categoryObj = () => {
-    const reducer = (sumPerCat: {[key: number]: number}, oneEntry: {[key: string]: number}) => {
-      sumPerCat[oneEntry.typ] = (oneEntry.typ in sumPerCat)
-                              ? sumPerCat[oneEntry.typ] + 1
+    const reducer = (sumPerCat: categoryObjType, oneEntry: {[key: string]: string}) => {
+      sumPerCat[+oneEntry.typ] = (oneEntry.typ in sumPerCat)
+                              ? sumPerCat[+oneEntry.typ] + 1
                               : 1
       return sumPerCat
     }
@@ -39,7 +40,7 @@ export default function App() {
 
       <BigImage imgPosition={imgPosition} setImgPosition={setImgPosition}
                 bigPhoto={ filteredPhoto[imgPosition.current] }
-                categoryObj={categoryObj} length={filteredPhoto.length}  />
+                categoryObj={categoryObj()} length={filteredPhoto.length}  />
     </div>
   )
 }

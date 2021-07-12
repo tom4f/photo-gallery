@@ -1,9 +1,9 @@
-type imgPositionType = { smallImgStart: number; smallImgsSize: number; current: number; category: number; }
+import { setStateType, categoryObjType } from './TypeDefinition';
 
 interface eightPhotoTypes {
-    setImgPosition  : React.Dispatch<React.SetStateAction<imgPositionType>>;
+    setImgPosition  : setStateType;
     setShowCategory : React.Dispatch<React.SetStateAction<boolean>>;
-    categoryObj     : { [key: number]: number }
+    categoryObj     : categoryObjType;
 }
 
 export const CategoryList = ( { setImgPosition, setShowCategory, categoryObj }: eightPhotoTypes ) => {
@@ -20,8 +20,8 @@ export const CategoryList = ( { setImgPosition, setShowCategory, categoryObj }: 
     const category = []
     const count = []
     for (const [key, value] of Object.entries( categoryObj ) ) {
-        category.push(<p className="oneCategory" key={key} onClick={ () => setImgPosition( prev => ({ ...prev, category: +key }) ) }>{categoryName[+key]}</p>)
-        count.push(   <p className="oneCategory" key={key} onClick={ () => setImgPosition( prev => ({ ...prev, category: +key }) ) }>{value}</p>)
+        category.push(<p className="oneCategory" key={key} onClick={ () => setImgPosition( prev => ({ ...prev, category: +key, current: 0 }) ) }>{categoryName[+key]}</p>)
+        count.push(   <p className="oneCategory" key={key} onClick={ () => setImgPosition( prev => ({ ...prev, category: +key, current: 0 }) ) }>{value}</p>)
     }
 
     return (

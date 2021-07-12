@@ -1,14 +1,13 @@
 import { imgFolder } from './api/read'
 import './css/SmallImages.css'
-
-type photoType = { id: string; text: string; autor: string; email: string; }
-type imgPositionType = { smallImgStart: number; smallImgsSize: number; current: number; category: number; }
+import { photoType, imgPositionType, setStateType } from './TypeDefinition';
 
 interface SmallImagesTypes {
-    eightPhoto        : null | Array<photoType>;
-    arrIndexFromImgId : (clickedId:number) => number;
+    eightPhoto        : Array<photoType>;
     imgPosition       : imgPositionType;
-    setImgPosition    : React.Dispatch<React.SetStateAction<imgPositionType>>;
+    setImgPosition    : setStateType;
+
+    arrIndexFromImgId : (clickedId:number) => number;
 }
 
 export const SmallImages = ( { eightPhoto, arrIndexFromImgId, imgPosition, setImgPosition }: SmallImagesTypes ) => {

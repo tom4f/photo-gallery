@@ -5,15 +5,14 @@ import { faCommentMedical, faCommentSlash, faArrowLeft, faArrowRight, faAngleDou
          faStopCircle, faAngleDoubleRight, faAlignJustify } from '@fortawesome/free-solid-svg-icons'
 import './css/BigImages.css'
 import { CategoryList } from './CategoryList'
-
-type photoType = { id: string; text: string; autor: string; insertDate: string; header:string; }
-type imgPositionType = { smallImgStart: number; smallImgsSize: number; current: number; category: number; }
+import { photoType, imgPositionType, setStateType, categoryObjType } from './TypeDefinition';
 
 interface eightPhotoTypes {
-    bigPhoto       : photoType;
     imgPosition    : imgPositionType;
-    setImgPosition : React.Dispatch<React.SetStateAction<imgPositionType>>;
-    categoryObj    : any;
+    setImgPosition : setStateType;
+
+    bigPhoto       : photoType;
+    categoryObj    : categoryObjType;
     length         : number;
 }
 
