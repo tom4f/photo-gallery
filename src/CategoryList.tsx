@@ -1,22 +1,16 @@
-import { setStateType, categoryObjType } from './TypeDefinition';
+import { useState } from 'react'
+import { setStateType, categoryObjType} from './TypeDefinition'
+import { categoryName } from './api/read'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
 
 interface eightPhotoTypes {
     setImgPosition  : setStateType;
-    setShowCategory : React.Dispatch<React.SetStateAction<boolean>>;
     categoryObj     : categoryObjType;
 }
 
-export const CategoryList = ( { setImgPosition, setShowCategory, categoryObj }: eightPhotoTypes ) => {
-
-    const categoryName:{ [key: number]: string } = { 
-        0  : 'aaa',
-        1  : 'bbb',
-        2  : 'ccc',
-        3  : 'ddd',
-        4  : 'Web Development',
-        99999 : 'Všechny'
-    }
-
+export const CategoryList = ( { setImgPosition, categoryObj}: eightPhotoTypes ) => {
+    const [ showCategory, setShowCategory ] = useState( false )
     const category = []
     const count = []
     for (const [key, value] of Object.entries( categoryObj ) ) {
@@ -25,18 +19,23 @@ export const CategoryList = ( { setImgPosition, setShowCategory, categoryObj }: 
     }
 
     return (
-        <section className="categoryList" onMouseLeave={ () => setShowCategory(false)} >
-            <fieldset>
-                <legend>Kategorie / počet fotek</legend>
-                <section>    
-                    <header>
-                        {category}
-                    </header>
-                    <article>
-                        {count}
-                    </article>
-                </section>
-            </fieldset>
-        </section>
+        <>
+            <FontAwesomeIcon className="category" icon={ faAlignJustify } onMouseOver={ () => setShowCategory( true ) }  />
+            { showCategory ?
+            <section className="categoryList" onMouseLeave={ () => setShowCategory(false)} >
+                <fieldset>
+                    <legend>Kategorie / počet fotek</legend>
+                    <section>    
+                        <header>
+                            {category}
+                        </header>
+                        <article>
+                            {count}
+                        </article>
+                    </section>
+                </fieldset>
+            </section>
+            : null }
+        </>
     )
 }

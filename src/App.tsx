@@ -6,7 +6,6 @@ import { BigImage } from './BigImage'
 import { photoType, categoryObjType } from './TypeDefinition';
 
 export default function App() {
-
   const [ allPhoto, setAllPhoto ]       = useState<photoType[]>([])
   const [ imgPosition, setImgPosition ] = useState({ smallImgStart: 0, smallImgsSize: 8, current: 0, category: 99999 })
 
@@ -14,7 +13,7 @@ export default function App() {
 
   const arrIndexFromImgId = (clickedImgId:number):number => filteredPhoto.findIndex( img => +img['id'] === clickedImgId )
 
-  const filteredPhoto = imgPosition.category === 99999
+  const filteredPhoto = imgPosition.category === 99999 
                       ? allPhoto
                       : allPhoto.filter( one => +one['typ'] === imgPosition.category )
 
@@ -35,9 +34,8 @@ export default function App() {
 
   return (
     <div className="container">
-      <SmallImages imgPosition={imgPosition} setImgPosition={setImgPosition}
+      <SmallImages imgPosition={imgPosition} setImgPosition={setImgPosition} 
                    eightPhoto={ eightPhoto } arrIndexFromImgId={arrIndexFromImgId} />
-
       <BigImage imgPosition={imgPosition} setImgPosition={setImgPosition}
                 bigPhoto={ filteredPhoto[imgPosition.current] }
                 categoryObj={categoryObj()} length={filteredPhoto.length}  />
