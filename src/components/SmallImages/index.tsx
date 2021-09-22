@@ -1,6 +1,6 @@
-import { imgFolder } from './api/read'
-import './css/SmallImages.css'
-import { photoType, imgPositionType, setStateType } from './TypeDefinition';
+import { imgFolder } from '../../api/read'
+import './SmallImages.css'
+import { photoType, imgPositionType, setStateType } from '../../TypeDefinition';
 
 interface SmallImagesTypes {
     eightPhoto        : Array<photoType>;

@@ -1,9 +1,7 @@
-const fotoGalleryOwner = window.location.search
-                       ? window.location.search.split('?fotoGalleryOwner=')[1]
-                       : '_ubytovani'
+const fotoGalleryOwner =  window.location.search.split('fotoGalleryOwner=')[1] || '_ubytovani'
 
 const dev = process.env.NODE_ENV !== 'production'
-const serverPath = dev ? 'http://localhost/lipnonet/rekreace/api' : './../api'
+export const serverPath = dev ? 'http://localhost/lipnonet/rekreace/api' : './../api'
 
 export const imgFolder = dev ? `http://localhost/lipnonet/rekreace/fotogalerie${fotoGalleryOwner}` : `./../fotogalerie${fotoGalleryOwner}`
 

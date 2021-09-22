@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { setStateType, categoryObjType} from './TypeDefinition'
-import { categoryName } from './api/read'
+import { setStateType, categoryObjType} from './../../TypeDefinition'
+import { categoryName } from './../../api/read'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
 

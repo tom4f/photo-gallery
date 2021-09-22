@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentMedical, faCommentSlash } from '@fortawesome/free-solid-svg-icons'
-import { photoType } from './TypeDefinition';
+import { photoType } from './../../TypeDefinition';
 
 interface eightPhotoTypes {
     bigPhoto       : photoType;

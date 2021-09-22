@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { setStateType} from './TypeDefinition';
+import { setStateType} from '../../TypeDefinition';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlayCircle, faStopCircle } from '@fortawesome/free-solid-svg-icons'
 

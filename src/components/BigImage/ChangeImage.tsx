@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight, faAngleDoubleLeft, faAngleDoubleRight}
     from '@fortawesome/free-solid-svg-icons'
-import { setStateType, imgPositionType} from './TypeDefinition';
+import { setStateType, imgPositionType} from './../../TypeDefinition';
 
 interface eightPhotoTypes {
     imgPosition    : imgPositionType;
