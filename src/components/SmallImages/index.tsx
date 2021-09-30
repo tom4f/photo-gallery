@@ -13,14 +13,15 @@ interface SmallImagesTypes {
 export const SmallImages = ( { eightPhoto, arrIndexFromImgId, imgPosition, setImgPosition }: SmallImagesTypes ) => {
 
     const eightImgsDiv = () => {
-        if ( !eightPhoto ) return;
 
-        return eightPhoto.map( (img) => (
+        console.log(imgPosition.current)
+
+        return eightPhoto?.map( (img) => (
                     <div key={img.id}
                          style={{
                             color: 'white',
                             opacity: `${ arrIndexFromImgId(+img.id) === imgPosition.current ? 0.5 : 1}`,
-                            backgroundImage: `url(${imgFolder}/${img.id}.jpg)` }}
+                            backgroundImage: `url(${imgFolder}/${img.id}.jpg?${ imgPosition.current === arrIndexFromImgId(+img.id) ? imgPosition.reload : 0 })` }}
                          onClick = { () => setImgPosition( old => ({ ...old, current: arrIndexFromImgId( +img.id ) }) )  }>
                         {img.id}
                     </div> ))

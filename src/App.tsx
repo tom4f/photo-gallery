@@ -7,9 +7,9 @@ import { photoType, categoryObjType } from './TypeDefinition';
 
 export default function App() {
   const [ allPhoto, setAllPhoto ]       = useState<photoType[]>([])
-  const [ imgPosition, setImgPosition ] = useState({ smallImgStart: 0, smallImgsSize: 8, current: 0, category: 99999 })
+  const [ imgPosition, setImgPosition ] = useState({ smallImgStart: 0, smallImgsSize: 8, current: 0, category: 99999, reload: 0 })
 
-  useEffect( () => { ( async() => setAllPhoto( await loadPicturesfromMySQL ) )() }, [])
+  useEffect( () => { ( async() => setAllPhoto( await loadPicturesfromMySQL() ) )() }, [imgPosition.reload])
 
   const arrIndexFromImgId = (clickedImgId:number):number => filteredPhoto.findIndex( img => +img['id'] === clickedImgId )
 
@@ -38,7 +38,8 @@ export default function App() {
                    eightPhoto={ eightPhoto } arrIndexFromImgId={arrIndexFromImgId} />
       <BigImage imgPosition={imgPosition} setImgPosition={setImgPosition}
                 bigPhoto={ filteredPhoto[imgPosition.current] }
-                categoryObj={categoryObj()} length={filteredPhoto.length}  />
+                categoryObj={categoryObj()} length={filteredPhoto.length}
+                setAllPhoto={setAllPhoto}  />
     </div>
   )
 }

@@ -100,3 +100,7 @@ npm install --save @fortawesome/react-fontawesome
 
 // gitHub
 git remote add origin https://github.com/tom4f/photo-gallery.git
+
+// styled-components
+// npm install @types/styled-components
+// npm install styled-components --save

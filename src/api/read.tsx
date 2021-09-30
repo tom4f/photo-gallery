@@ -5,7 +5,7 @@ export const serverPath = dev ? 'http://localhost/lipnonet/rekreace/api' : './..
 
 export const imgFolder = dev ? `http://localhost/lipnonet/rekreace/fotogalerie${fotoGalleryOwner}` : `./../fotogalerie${fotoGalleryOwner}`
 
-export const loadPicturesfromMySQL = fetch( `${serverPath}/pdo_read_foto${fotoGalleryOwner}.php` )
+export const loadPicturesfromMySQL = () => fetch( `${serverPath}/pdo_read_foto${fotoGalleryOwner}.php` )
                                         .then(  response => response.json() )
                                         .catch( response => console.log( { response } ) )
 

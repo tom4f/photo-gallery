@@ -1,3 +1,24 @@
+.main-img {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top center;
+  height: calc(100vh - 77px);
+  width: auto;
+  max-width: 100%;
+  position: relative;
+}
+
+.main-img::after {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top center;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;     
+}
+
 .photoInfo {
   width: fit-content;
   position: absolute;
@@ -128,6 +149,7 @@
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
+  z-index: 3;
 }
 
 .categoryList fieldset {

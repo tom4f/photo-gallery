@@ -46,6 +46,7 @@ export const Formular = ({editPhoto, change, edit, setEditPhoto} : formularType)
 
         <form ref={form} name="formular" onSubmit={event => edit(event, form.current)}>
             <div className="form_booking">
+                <input name="id" value={ editPhoto?.id } onChange={ change } hidden /> 
                 <div className="input_booking">
                     <label>Název</label>
                     <input value={ editPhoto?.header } onChange={ change } placeholder="zadej název" name="header" size={34} />
@@ -88,14 +89,14 @@ export const Formular = ({editPhoto, change, edit, setEditPhoto} : formularType)
                 </div>
                 <div className="input_booking">
                     <label>Vyberte foto { imgStatus() } </label>
-                    <input type="file" id="upfile" name="upfile" accept="image/*" onChange={ onImageChange } />
+                    <input type="file" name="upfile" accept="image/*" onChange={ onImageChange } />
                     
                 </div>
                 <div className="submit_booking">
-                    <input type="Submit" name="add" defaultValue="Přidej" />
+                    <input type="Submit" name="create" defaultValue="Přidej" />
                 </div>
                 <div className="submit_booking" style={{ backgroundColor: 'rgba(0, 0, 256, 0.4)' }}>
-                    <input type="Submit" name="edit" defaultValue="Uprav" />
+                    <input type="Submit" name="update" defaultValue="Uprav" />
                 </div>
                 <div className="submit_booking" style={{ backgroundColor: 'rgba(256, 0, 0, 0.4)' }}>
                     <input type="Submit" name="delete" defaultValue="Smaž" />

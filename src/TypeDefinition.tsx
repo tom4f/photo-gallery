@@ -18,6 +18,7 @@ export type imgPositionType = {
     smallImgsSize: number;
     current: number;
     category: number;
+    reload: number;
 }
 
 export type setStateType = React.Dispatch<React.SetStateAction<imgPositionType>>
