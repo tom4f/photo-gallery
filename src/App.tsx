@@ -3,10 +3,10 @@ import './css/App.css';
 import { loadPicturesfromMySQL } from './api/read'
 import { SmallImages } from './components/SmallImages'
 import { BigImage } from './components/BigImage'
-import { photoType, categoryObjType } from './TypeDefinition';
+import { allPhotoType, categoryObjType } from './TypeDefinition';
 
 export default function App() {
-  const [ allPhoto, setAllPhoto ]       = useState<photoType[]>([])
+  const [ allPhoto, setAllPhoto ]       = useState<allPhotoType[]>([])
   const [ imgPosition, setImgPosition ] = useState({ smallImgStart: 0, smallImgsSize: 8, current: 0, category: 99999, reload: 0 })
 
   useEffect( () => { ( async() => setAllPhoto( await loadPicturesfromMySQL() ) )() }, [imgPosition.reload])
@@ -21,7 +21,10 @@ export default function App() {
   
   const categoryObj = () => {
     const reducer = (sumPerCat: categoryObjType, oneEntry: {[key: string]: string}) => {
-      sumPerCat[+oneEntry.typ] = (oneEntry.typ in sumPerCat)
+       
+      if ( !oneEntry.typ ) return sumPerCat
+
+      sumPerCat[oneEntry.typ] = (oneEntry.typ in sumPerCat)
                               ? sumPerCat[+oneEntry.typ] + 1
                               : 1
       return sumPerCat

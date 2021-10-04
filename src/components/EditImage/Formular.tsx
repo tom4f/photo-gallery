@@ -1,40 +1,30 @@
-import { photoType, changeType } from './../../TypeDefinition'
+import { formularType, photoType } from './../../TypeDefinition'
 import { useRef, useState } from 'react'
 
-type changeTypeFunction  = ( e:changeType ) => void
-type formularType = {
-    editPhoto:photoType,
-    change:changeTypeFunction,
-    edit:any,
-    setEditPhoto: any
-}
-
-export const Formular = ({editPhoto, change, edit, setEditPhoto} : formularType) => {
+export const Formular = ({editPhoto, change, editLogic, setEditPhoto} : formularType) => {
 
     const [ imgParams, setImgParams ] = useState( { size: 0, lastModified: '' } )
     const [ isLoading, setIsLoading ] = useState( false )
 
-    const form = useRef(null)
+    const form = useRef<HTMLFormElement>(null)
 
-    const onImageChange = (event:any) => {
+    const onImageChange = (event:React.ChangeEvent<HTMLInputElement>) => {
 
-        if(event.target.files.length !== 0) {
-            const file = event.target.files[0]
-            const { size, lastModified } = file
-            const sizeMB = +(size / (1024 * 1024)).toFixed(1)
-            const last = new Date(lastModified)
-            const lastModifiedText = `${last.getDay()}.${last.getMonth() + 1}.${last.getFullYear()}`
+        if( !event.target.files ) return 
 
-            setImgParams({ size: sizeMB, lastModified: lastModifiedText })
+        const file = event.target.files[0]
+        const { size, lastModified } = file
+        const sizeMB = +(size / (1024 * 1024)).toFixed(1)
+        const last = new Date(lastModified)
+        const lastModifiedText = `${last.getDay()}.${last.getMonth() + 1}.${last.getFullYear()}`
 
-            const reader = new FileReader();
-            reader.onload = () => {
-                setEditPhoto( (old:any) => ( { ...old, url: reader.result } ) )
-            }
-            reader.onloadstart = () => setIsLoading(true)
-            reader.onloadend = () => setIsLoading(false)
-            reader.readAsDataURL(event.target.files[0])
-        }
+        setImgParams({ size: sizeMB, lastModified: lastModifiedText })
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onloadstart = () => setIsLoading(true)
+        reader.onloadend   = () => setIsLoading(false)
+        reader.onload      = () => setEditPhoto( (old:photoType) => ( { ...old, url: reader.result } ) )
     }
 
     const imgStatus = () => {
@@ -44,7 +34,7 @@ export const Formular = ({editPhoto, change, edit, setEditPhoto} : formularType)
 
     return (
 
-        <form ref={form} name="formular" onSubmit={event => edit(event, form.current)}>
+        <form ref={form} name="formular" >
             <div className="form_booking">
                 <input name="id" value={ editPhoto?.id } onChange={ change } hidden /> 
                 <div className="input_booking">
@@ -93,13 +83,13 @@ export const Formular = ({editPhoto, change, edit, setEditPhoto} : formularType)
                     
                 </div>
                 <div className="submit_booking">
-                    <input type="Submit" name="create" defaultValue="Přidej" />
+                    <input type="Submit" onClick={event => editLogic(event, form.current)} name="create" defaultValue="Přidej" />
                 </div>
                 <div className="submit_booking" style={{ backgroundColor: 'rgba(0, 0, 256, 0.4)' }}>
-                    <input type="Submit" name="update" defaultValue="Uprav" />
+                    <input type="Submit" onClick={event => editLogic(event, form.current)} name="update" defaultValue="Uprav" />
                 </div>
                 <div className="submit_booking" style={{ backgroundColor: 'rgba(256, 0, 0, 0.4)' }}>
-                    <input type="Submit" name="delete" defaultValue="Smaž" />
+                    <input type="Submit" onClick={event => editLogic(event, form.current)} name="delete" defaultValue="Smaž" />
                 </div>
             </div>
         </form>

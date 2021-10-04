@@ -1,30 +1,28 @@
-import { useState, Dispatch, SetStateAction } from 'react'
-import { photoType, changeType, setStateType } from './../../TypeDefinition'
+import { useState } from 'react'
+import { changeType, editImage, LoginType } from './../../TypeDefinition'
 import { Login } from './Login'
 import { Formular } from './Formular'
 import { serverPath } from './../../api/read'
 import './EditImage.css'
 
-export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: {
-    editPhoto: photoType,
-    setEditPhoto:Dispatch<SetStateAction<photoType>>,
-    setImgPosition : setStateType
-} ) => {
+export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: editImage ) => {
 
     const [ loginData, setLoginData ]   = useState({
-        isLogged: false,
-        webToken: 'error',
+        isLogged : false,
+        webToken : 'error',
         webAccess: 'error',
-        webUser: 'error'
+        webUser  : 'error'
     })
   
     const change = (e:changeType) =>  setEditPhoto( orig => ( { ...orig, [e.target.name]: e.target.value } ) )
 
-    const login = async(event: any, formCurrent: any) => {
+    const login: LoginType = async(event, formCurrent) => {
         event.preventDefault()
 
+        if (null === formCurrent) return 
+
         const FD = new FormData(formCurrent)
-        let object:any = {}
+        let object:{ [key: string]: string | File } = {}
         FD.forEach( (value, key) => object[key] = value )
         object['fotoGalleryOwner'] = '_ubytovani';
 
@@ -37,23 +35,21 @@ export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: {
 
         const [ webToken, webAccess, webUser ]   = respLogin
 
-
-
-        webToken.webToken === 'error' && setLoginData( ({ ...webToken, ...webAccess, ...webUser, isLogged: true }) )
+        webToken.webToken !== 'error' && setLoginData( ({ ...webToken, ...webAccess, ...webUser, isLogged: true }) )
     }
 
-    const edit = (event:any, formCurrent:any) => {
+    const editLogic = (event: React.MouseEvent<HTMLInputElement>, formCurrent: HTMLFormElement | null):void => {
         event.preventDefault()
-
-        const submitCliked = event.nativeEvent.submitter.name
-
         const ajax = async( action:string ) => {
 
+            if (null === formCurrent) return 
+
             const FD = new FormData(formCurrent)
-            let object:any = {}
+            
+            let object:{ [key: string]: string | File } = {}
             FD.forEach( (value, key) => object[key] = value )
-            const fileName = object.upfile.name
-            !fileName && FD.delete('upfile')
+            const fileName = object.upfile as File
+            !fileName.name && FD.delete('upfile')
             FD.append('webToken' , loginData.webToken)
             FD.append('webAccess', loginData.webAccess)
             FD.append('webUser'  , loginData.webUser)
@@ -78,7 +74,7 @@ export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: {
 
             setImgPosition( old => ( { ...old, reload: ++old.reload } ) )
         }
-
+        const submitCliked = (event.target as HTMLButtonElement).name
         switch (submitCliked) {
             case 'update':
                 ajax('update')
@@ -95,12 +91,12 @@ export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: {
                 ajax('create')
                 break
             }
-    }
 
+ }
 
     return (
         <>
-            { loginData.isLogged ? <Formular editPhoto={editPhoto} setEditPhoto={setEditPhoto} change={change} edit={edit} />
+            { loginData.isLogged ? <Formular editPhoto={editPhoto} setEditPhoto={setEditPhoto} change={change} editLogic={editLogic} />
                        : <Login login={login} />
             }
         </>
