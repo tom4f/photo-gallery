@@ -1,0 +1,56 @@
+.categoryList {
+    position: absolute;
+    top: 5%;
+    left: 45%;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    width: 270px;
+  }
+  
+  .categoryList fieldset {
+    margin: 3px;
+    padding: 3px;
+    font-size: 1rem;
+    border: 2px solid green;
+    border-radius: 8px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .categoryList fieldset legend {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .categoryList fieldset section {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+  
+  .categoryList fieldset section .oneCategory {
+    display: flex;
+    width: auto;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  
+  .categoryList fieldset section .oneCategory:hover {
+    border: 1px solid lime;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .categoryList fieldset section header {
+    text-align: right;
+    white-space: nowrap;
+    padding-right: 10px;
+    width: 75%;
+  }
+  
+  .categoryList fieldset section article {
+    border-left: 1px dotted #00b300;
+    text-align: right;
+    padding-left: 10px;
+    margin: 0px 5px;
+    width: 25%;
+  }

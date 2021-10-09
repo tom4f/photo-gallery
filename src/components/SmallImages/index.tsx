@@ -6,13 +6,13 @@ export const SmallImages = ( { eightPhoto, arrIndexFromImgId, imgPosition, setIm
 
     return (
         <header className="imgs">
-            { eightPhoto?.map( (img) => (
+            { eightPhoto?.map( img => (
                 <StyledDiv
                     key = {img.id}
-                    img = {img}
+                    imgId = {img.id}
                     arrIndexFromImgId = {arrIndexFromImgId}
                     imgPosition = {imgPosition} 
-                    onClick={ () => setImgPosition( old => ({...old, current: arrIndexFromImgId( +img.id ) }) )  }
+                    onClick ={ () => setImgPosition( old => ({...old, current: arrIndexFromImgId( +img.id ) }) )  }
                 />
             ))} 
         </header>

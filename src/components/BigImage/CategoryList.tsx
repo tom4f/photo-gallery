@@ -3,6 +3,7 @@ import { setStateType, categoryObjType} from './../../TypeDefinition'
 import { categoryName } from './../../api/read'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
+import './CategoryList.css'
 
 interface eightPhotoTypes {
     setImgPosition  : setStateType;
@@ -12,29 +13,29 @@ interface eightPhotoTypes {
 export const CategoryList = ( { setImgPosition, categoryObj}: eightPhotoTypes ) => {
     const [ showCategory, setShowCategory ] = useState( false )
     const category = []
-    const count = []
+
     for (const [key, value] of Object.entries( categoryObj ) ) {
-        category.push(<p className="oneCategory" key={key} onClick={ () => setImgPosition( prev => ({ ...prev, category: +key, current: 0 }) ) }>{categoryName[+key]}</p>)
-        count.push(   <p className="oneCategory" key={key} onClick={ () => setImgPosition( prev => ({ ...prev, category: +key, current: 0 }) ) }>{value}</p>)
+        const changeCategory = () => setImgPosition( prev => ({ ...prev, category: +key, smallImgStart:0, current: 0 }) )
+        category.push(
+            <div className="oneCategory" key={key} onClick={ changeCategory }>
+                <header>{categoryName[+key]}</header>
+                <article>{value}</article>
+            </div>
+        )
     }
 
     return (
         <>
             <FontAwesomeIcon className="category" icon={ faAlignJustify } onMouseOver={ () => setShowCategory( true ) }  />
             { showCategory ?
-            <section className="categoryList" onMouseLeave={ () => setShowCategory(false)} >
+            <div className="categoryList" onMouseLeave={ () => setShowCategory(false)} >
                 <fieldset>
                     <legend>Kategorie / počet fotek</legend>
                     <section>    
-                        <header>
                             {category}
-                        </header>
-                        <article>
-                            {count}
-                        </article>
                     </section>
                 </fieldset>
-            </section>
+            </div>
             : null }
         </>
     )

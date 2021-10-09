@@ -141,57 +141,6 @@
   cursor: pointer;
 }
 
-.categoryList {
-  position: absolute;
-  top: 5%;
-  left: 45%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: center;
-  z-index: 3;
-}
-
-.categoryList fieldset {
-  margin: 3px;
-  padding: 3px;
-  font-size: 1rem;
-  border: 2px solid green;
-  border-radius: 8px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.categoryList fieldset legend {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.categoryList fieldset section {
-  display: flex;
-  width: auto;
-}
-
-.categoryList fieldset section .oneCategory {
-  padding: 0px 3px;
-  margin: 5px;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-
-.categoryList fieldset section .oneCategory:hover {
-  border: 1px solid lime;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.categoryList fieldset section header {
-  text-align: right;
-  border-right: 1px dotted #00b300;
-}
-
-.categoryList fieldset section article {
-  text-align: right;
-}
-
 /* Fade in animation */
 /* film mode property */
 @keyframes fadeIn {

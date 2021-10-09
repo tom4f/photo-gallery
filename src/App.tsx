@@ -17,31 +17,30 @@ export default function App() {
                       ? allPhoto
                       : allPhoto.filter( one => +one['typ'] === imgPosition.category )
 
+  const bigPhoto = filteredPhoto[imgPosition.current]
+
   const eightPhoto = filteredPhoto.slice(imgPosition.smallImgStart, imgPosition.smallImgStart + imgPosition.smallImgsSize)
   
-  const categoryObj = () => {
-    const reducer = (sumPerCat: categoryObjType, oneEntry: {[key: string]: string}) => {
-       
+  const reducer = (sumPerCat: categoryObjType, oneEntry: {[key: string]: string}) => {
       if ( !oneEntry.typ ) return sumPerCat
-
       sumPerCat[oneEntry.typ] = (oneEntry.typ in sumPerCat)
                               ? sumPerCat[+oneEntry.typ] + 1
                               : 1
       return sumPerCat
-    }
-    return { 
-        ...allPhoto.reduce(reducer, {}),
-        99999 : allPhoto.length
-    }
+  }
+
+  const categoryObj = {
+      ...allPhoto.reduce(reducer, {}),
+      99999 : allPhoto.length
   }
 
   return (
     <div className="container">
       <SmallImages imgPosition={imgPosition} setImgPosition={setImgPosition} 
-                   eightPhoto={ eightPhoto } arrIndexFromImgId={arrIndexFromImgId} />
+                   eightPhoto={eightPhoto} arrIndexFromImgId={arrIndexFromImgId} />
       <BigImage imgPosition={imgPosition} setImgPosition={setImgPosition}
-                bigPhoto={ filteredPhoto[imgPosition.current] }
-                categoryObj={categoryObj()} length={filteredPhoto.length}
+                bigPhoto={bigPhoto}
+                categoryObj={categoryObj} length={filteredPhoto.length}
                 setAllPhoto={setAllPhoto}  />
     </div>
   )

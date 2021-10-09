@@ -1,17 +1,17 @@
 import { imgFolder } from '../../api/read'
 import styled, { css } from 'styled-components'
-import { photoType, imgPositionType } from '../../TypeDefinition';
+import { imgPositionType } from '../../TypeDefinition';
 
 interface StyledDivTypes {
     imgPosition       : imgPositionType;
     arrIndexFromImgId : (clickedId:number) => number;
-    img               : photoType;
+    imgId             : string;
 }
 
 export const StyledDiv = styled.div< StyledDivTypes >`
-    ${ ({imgPosition, arrIndexFromImgId, img}) => css`
+    ${ ({imgPosition, arrIndexFromImgId, imgId}) => css`
         color           : 'white';
-        opacity         : ${ arrIndexFromImgId(+img.id) === imgPosition.current ? 0.5 : 1};
-        background-image: url(${imgFolder}/${img.id}.jpg?${ imgPosition.reload }) }};
+        opacity         : ${ arrIndexFromImgId(+imgId) === imgPosition.current ? 0.5 : 1};
+        background-image: url(${imgFolder}/${imgId}.jpg?${ imgPosition.reload }) }};
     `}
 `
