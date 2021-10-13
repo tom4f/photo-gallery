@@ -75,3 +75,9 @@ export type BigImageType = {
 export type LoginType = {
     (event: React.FormEvent<HTMLFormElement>, formCurrent: HTMLFormElement | null): Promise<void>
 }
+
+export type AlertType = {
+        header : string;
+        text   : string;
+        color? : string;
+}

@@ -6,6 +6,7 @@ import { ChangeImage } from './ChangeImage'
 import { InfoText } from './InfoText'
 import { EditImage } from './../EditImage';
 import { BigImg } from './BigImg.styled' 
+import { editStatus } from '../../api/read';
 import './BigImages.css'
 
 export const BigImage = ( {bigPhoto, imgPosition, setImgPosition, categoryObj, length}: BigImageType ) => {
@@ -14,7 +15,7 @@ export const BigImage = ( {bigPhoto, imgPosition, setImgPosition, categoryObj, l
     const [ editPhoto, setEditPhoto ] = useState( bigPhoto )
     const [ isEdit, setIsEdit] = useState( false )
 
-    useEffect( () => setIsEdit( !!window.location.search.match(/edit=yes/) ), [] )
+    useEffect( () => setIsEdit( editStatus ), [])
 
     useEffect( () => {
             setFadeIn(true)

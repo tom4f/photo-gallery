@@ -1,0 +1,13 @@
+.alert {
+    text-align: center;
+    color: lime;
+    margin: 0;
+  }
+  
+  .alert .header {
+    font-size: 30px;
+  }
+  
+  .alert .text {
+    font-size: 20px;
+  }

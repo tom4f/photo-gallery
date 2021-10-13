@@ -1,7 +1,9 @@
 import { useRef } from "react"
-import { LoginType } from './../../TypeDefinition'
+import { LoginType, AlertType } from './../../TypeDefinition'
+import { AlertBox } from './AlertBox'
+import './AlertBox.css'
 
-export const Login = ( {login}: {login: LoginType} ) => {
+export const Login = ( {login, alert}: {login: LoginType, alert: AlertType} ) => {
 
     const form = useRef<HTMLFormElement>(null)
 
@@ -16,7 +18,8 @@ export const Login = ( {login}: {login: LoginType} ) => {
                     <label>Zadejte heslo</label>
                     <input name="password" type="password" placeholder="heslo" size={10} autoComplete="off"/>
                 </div>
-                <div className="submit_booking">
+                { alert.header ? <AlertBox alert={ alert } /> : null }
+                <div className="submit_booking green">
                     <input type="submit" name="login" />
                 </div>
             </div>

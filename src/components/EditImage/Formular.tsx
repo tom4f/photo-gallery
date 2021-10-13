@@ -36,14 +36,14 @@ export const Formular = ({editPhoto, change, editLogic, setEditPhoto} : formular
 
         <form ref={form} name="formular" >
             <div className="form_booking">
-                <input name="id" value={ editPhoto?.id } onChange={ change } hidden /> 
+                <input name="id" value={ editPhoto?.id || '' } onChange={ change } hidden /> 
                 <div className="input_booking">
                     <label>Název</label>
-                    <input value={ editPhoto?.header } onChange={ change } placeholder="zadej název" name="header" size={34} />
+                    <input value={ editPhoto?.header || '' } onChange={ change } placeholder="zadej název" name="header" size={34} />
                 </div>
                 <div className="input_booking" style={{ width: '40%' }}>
                     <label>Kategorie</label>
-                    <select value={ editPhoto?.typ } onChange={ change } name="typ">
+                    <select value={ editPhoto?.typ || '' } onChange={ change } name="typ">
                         <option value="" >--- vyber kategorii</option>
                         <option value="0">Ubytování</option>
                         <option value="1">Lipenská přehrada</option>
@@ -59,19 +59,19 @@ export const Formular = ({editPhoto, change, editLogic, setEditPhoto} : formular
                 </div>
                 <div className="input_booking" style={{ width: '40%' }}>
                     <label>Datum focení</label>
-                    <input name="date" value={ editPhoto?.date } onChange={ change } size={10} type="date" />
+                    <input name="date" value={ editPhoto?.date || '' } onChange={ change } size={10} type="date" />
                 </div>
                 <div className="input_booking">
                     <label>Popis</label>
-                    <textarea value={ editPhoto?.text } onChange={ change } name="text" rows={2} cols={60} placeholder="popis fotky"  wrap="Yes"></textarea>
+                    <textarea value={ editPhoto?.text || '' } onChange={ change } name="text" rows={2} cols={60} placeholder="popis fotky"  wrap="Yes"></textarea>
                 </div>
                 <div className="input_booking" style={{ width: '40%' }}>
                     <label>Autor</label>
-                    <input value={ editPhoto?.autor } onChange={ change } name="autor" placeholder="autor" size={10} />
+                    <input value={ editPhoto?.autor || '' } onChange={ change } name="autor" placeholder="autor" size={10} />
                 </div>
                 <div className="input_booking" style={{ width: '40%' }}>
                     <label>Email</label>
-                    <input placeholder="email" name="email" value={ editPhoto?.email } onChange={ change } size={20} />
+                    <input placeholder="email" name="email" value={ editPhoto?.email || '' } onChange={ change } size={20} />
                 </div>
                 <div className="input_booking">
                     <label>otoceni vlevo o kolik stupňů</label>
@@ -82,13 +82,13 @@ export const Formular = ({editPhoto, change, editLogic, setEditPhoto} : formular
                     <input type="file" name="upfile" accept="image/*" onChange={ onImageChange } />
                     
                 </div>
-                <div className="submit_booking">
+                <div className="submit_booking green">
                     <input type="Submit" onClick={event => editLogic(event, form.current)} name="create" defaultValue="Přidej" />
                 </div>
-                <div className="submit_booking" style={{ backgroundColor: 'rgba(0, 0, 256, 0.4)' }}>
+                <div className="submit_booking blue">
                     <input type="Submit" onClick={event => editLogic(event, form.current)} name="update" defaultValue="Uprav" />
                 </div>
-                <div className="submit_booking" style={{ backgroundColor: 'rgba(256, 0, 0, 0.4)' }}>
+                <div className="submit_booking red" style={{ backgroundColor: 'rgba(256, 0, 0, 0.4)' }}>
                     <input type="Submit" onClick={event => editLogic(event, form.current)} name="delete" defaultValue="Smaž" />
                 </div>
             </div>

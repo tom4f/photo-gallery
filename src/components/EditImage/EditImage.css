@@ -125,9 +125,33 @@ http://stackoverflow.com/questions/26573346/ios-safari-messes-up-input-type-date
 	padding: 0;
 	margin: 5px;
 	text-align: left;
-	background-color:rgba(0, 256, 0, 0.4);
 	width: 25%;
 }
+
+.green{
+	background-color:rgba(0, 256, 0, 0.4);
+}
+
+.blue{
+	background-color:rgba(0, 0, 256, 0.4);
+}
+
+.red{
+	background-color:rgba(256, 0, 0, 0.4);
+}
+
+.green input:focus{
+	background-color:rgba(0, 256, 0, 0.5);
+}
+
+.blue input:focus{
+	background-color:rgba(0, 0, 256, 0.5);
+}
+
+.red input:focus{
+	background-color:rgba(256, 0, 0, 0.5);
+}
+
 
 .submit_booking:hover{
 	border: 1px solid black;
@@ -140,8 +164,4 @@ http://stackoverflow.com/questions/26573346/ios-safari-messes-up-input-type-date
 	border: none;
 	font-size: 1rem;
 	border-radius: 5px;
-}
-
-.submit_booking input:focus{
-	background-color:rgba(0, 256, 0, 0.5);
 }
