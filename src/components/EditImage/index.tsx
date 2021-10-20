@@ -6,7 +6,7 @@ import { serverPath, fotoGalleryOwner } from './../../api/read'
 import './EditImage.css'
 import { Delay }    from './AlertBox';
 
-export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: editImage ) => {
+export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition, categoryObj }: editImage ) => {
 
     interface alertTypes {
         header : string;
@@ -25,10 +25,14 @@ export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: editImag
         webUser  : 'error'
     })
 
-    useEffect( () => {
-        const respObj = JSON.parse( sessionStorage.getItem('client') || '{}'  )
-        setLoginData( respObj )
-    }, [] )
+    const applySessionStorageLoginData = (): void => {
+        const clientJSON = sessionStorage.getItem('client')
+        if ( !clientJSON ) return
+        const clientObj = JSON.parse( clientJSON );
+        (fotoGalleryOwner === clientObj.webAccess) && setLoginData( clientObj )   
+    }
+
+    useEffect( () => applySessionStorageLoginData() , [] )
   
     const change = (e:changeType) =>  setEditPhoto( orig => ( { ...orig, [e.target.name]: e.target.value } ) )
 
@@ -81,7 +85,9 @@ export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: editImag
         event.preventDefault()
         const ajax = async( action:string ) => {
 
-            if (null === formCurrent) return 
+            if ( !formCurrent ) return 
+
+            setAlert( { header: 'Ukládám změny', text: 'malý moment...', color: 'lime' } )
 
             const FD = new FormData(formCurrent)
             
@@ -111,6 +117,7 @@ export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: editImag
             const respAction = await sendAction.text()
             console.log('text: ' + respAction )
 
+            setAlert( { header: 'Hotovo', text: ':-)', color: 'lime' } )
             setImgPosition( old => ( { ...old, reload: ++old.reload } ) )
         }
         const submitCliked = (event.target as HTMLButtonElement).name
@@ -130,13 +137,50 @@ export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition }: editImag
                 ajax('create')
                 break
             }
+ }
 
+ const editCategoryLogic = (event: React.MouseEvent<HTMLInputElement>, formCategoryCurrent: HTMLFormElement | null):void => {
+    event.preventDefault()
+    const ajax = async() => {
+
+        if ( !formCategoryCurrent ) return 
+        setAlert( { header: 'Ukládám změny', text: 'malý moment...', color: 'lime' } )
+
+        const FD = new FormData(formCategoryCurrent)
+        
+        let object:{ [key: string]: string | File } = {}
+
+        FD.forEach( (value, key) => {
+
+            if ( key.startsWith('index-') ) {
+                //key = key.replace('index-', '')
+            } else if ( key.startsWith('name-') ) {
+                key = key.replace('name-', '')
+                object[key] = value
+            }
+
+            
+
+
+        })
+        
+        
+        
+        FD.append('webToken' , loginData.webToken)
+
+        console.log(object)
+    }
+
+    ajax()
  }
 
     return (
         <>
             { loginData.isLogged
-                ? <Formular editPhoto={editPhoto} setEditPhoto={setEditPhoto} change={change} editLogic={editLogic} />
+                ? <Formular editPhoto={editPhoto} setEditPhoto={setEditPhoto}
+                            change={change} editLogic={editLogic} editCategoryLogic={editCategoryLogic}
+                            alert={ alert }
+                            setImgPosition={setImgPosition} categoryObj={categoryObj} />
                 : <Login login={login} alert={ alert }/>
             }
         </>

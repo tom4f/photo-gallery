@@ -10,6 +10,7 @@ export const SmallImages = ( { eightPhoto, arrIndexFromImgId, imgPosition, setIm
                 <StyledDiv
                     key = {img.id}
                     imgId = {img.id}
+                    imgType = {img.imgType}
                     arrIndexFromImgId = {arrIndexFromImgId}
                     imgPosition = {imgPosition} 
                     onClick ={ () => setImgPosition( old => ({...old, current: arrIndexFromImgId( +img.id ) }) )  }

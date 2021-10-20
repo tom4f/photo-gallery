@@ -9,12 +9,13 @@ class urlParams {
         })
         return {
             fotoGalleryOwner: searchObj.fotoGalleryOwner || '_ubytovani',
-            editStatus      : searchObj?.edit === 'yes' ? true : false
+            editStatus      : searchObj.edit === 'yes' ? true : false,
+            category        : searchObj.category === 'yes' ? true : false
         }
     }
 }
 
-export const { fotoGalleryOwner, editStatus } = urlParams.getSearchObj
+export const { fotoGalleryOwner, editStatus, category } = urlParams.getSearchObj
 
 const dev = process.env.NODE_ENV !== 'production'
 export const serverPath = dev ? 'http://localhost/lipnonet/rekreace/api' : './../api'
@@ -32,12 +33,26 @@ export const loadPicturesfromMySQL1 = async () => {
     } catch(err) {
         console.log( { err } )
     }
-
     return resp
-
 }
 
-export const categoryName:{ [key: number]: string } = { 
+
+
+export const readCategoryList = async () => {
+    let respObj = {}
+    try {
+        const resp = await fetch( `${serverPath}/readCategoryList.php?fotoGalleryOwner=${fotoGalleryOwner}`)
+        const respText = await resp.text()
+        respObj = JSON.parse( respText )
+        console.log( respObj )
+    } catch(err) {
+        console.log( { err } )
+    }
+    return respObj
+}
+
+
+/* export const categoryName:{ [key: number]: string } = { 
     0  : 'Ubytování',
     1  : 'Lipenská přehrada',
     2  : 'Příroda',
@@ -48,4 +63,5 @@ export const categoryName:{ [key: number]: string } = {
     10 : 'Kaliště - kniha',
     11 : 'Kaliště',
     99999 : 'Všechny'
-}
+} */
+

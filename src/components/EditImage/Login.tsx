@@ -1,7 +1,6 @@
 import { useRef } from "react"
 import { LoginType, AlertType } from './../../TypeDefinition'
 import { AlertBox } from './AlertBox'
-import './AlertBox.css'
 
 export const Login = ( {login, alert}: {login: LoginType, alert: AlertType} ) => {
 

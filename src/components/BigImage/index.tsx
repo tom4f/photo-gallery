@@ -29,7 +29,8 @@ export const BigImage = ( {bigPhoto, imgPosition, setImgPosition, categoryObj, l
             <ChangeImage  setImgPosition={setImgPosition} length={length} imgPosition={imgPosition}  />
             <Presentation setImgPosition={setImgPosition} length={length} /> 
             <CategoryList setImgPosition={setImgPosition} categoryObj={categoryObj} />
-            { isEdit && <EditImage setImgPosition={setImgPosition} editPhoto={editPhoto} setEditPhoto={setEditPhoto} /> }
+            { isEdit && <EditImage setImgPosition={setImgPosition} categoryObj={categoryObj}
+                                   editPhoto={editPhoto} setEditPhoto={setEditPhoto} /> }
         </BigImg>
     )
 }

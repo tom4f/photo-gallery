@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import './AlertBox.css'
 
 export const AlertBox = ( { alert: { header = '', text = '', color= 'red' } } ) => {
 

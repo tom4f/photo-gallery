@@ -1,0 +1,9 @@
+.categoryListEdit {
+    display: flex;
+    flex-direction: column;
+}
+
+.oneLine {
+    display: flex;
+    flex-direction: row;
+}
