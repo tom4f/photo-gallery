@@ -33,6 +33,9 @@ export type categoryNameType = { [key: string]: string };
 
 export type changeType = ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>
 
+export type categoryChangeType = ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>
+
+
 export type SmallImagesTypes = {
     eightPhoto        : Array<allPhotoType>;
     imgPosition       : imgPositionType;
@@ -53,7 +56,7 @@ export type formularType = {
     setEditPhoto     : Dispatch<SetStateAction<photoType>>;
     change           : changeTypeFunction;
     editLogic        : (event:React.MouseEvent<HTMLInputElement>, formCurrent: HTMLFormElement | null) => void;
-    editCategoryLogic: (event:React.MouseEvent<HTMLInputElement>, formCurrent: HTMLFormElement | null) => void;
+    editCategoryLogic: (event:React.MouseEvent<HTMLInputElement>, categoryName: categoryNameType | null) => void;
     alert            : AlertType;
     setImgPosition   : setStateType;
     categoryObj      : categoryObjType;

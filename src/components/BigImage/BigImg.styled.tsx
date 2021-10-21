@@ -2,14 +2,14 @@ import { imgFolder } from '../../api/read'
 import styled, { css } from 'styled-components'
 import { imgPositionType, allPhotoType, photoType } from '../../TypeDefinition'
 
-type IBigImg =  {
+type BigImgType =  {
     editPhoto  : photoType;
     bigPhoto   : allPhotoType;
     fadeIn     : boolean;
     imgPosition: imgPositionType;
 }
 
-export const BigImg = styled.main< IBigImg >`
+export const BigImg = styled.main< BigImgType >`
  
 ${ ({bigPhoto, editPhoto, fadeIn, imgPosition}) => ( bigPhoto && !editPhoto) && css`
     & { 
@@ -36,4 +36,5 @@ ${ ({bigPhoto, editPhoto, fadeIn, imgPosition}) => editPhoto && css`
         `}
     }`
 }
+
 `

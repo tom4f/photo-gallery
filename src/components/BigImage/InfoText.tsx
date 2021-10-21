@@ -10,15 +10,18 @@ interface eightPhotoTypes {
 export const InfoText = ( {bigPhoto}: eightPhotoTypes ) => {
 
     const [ showInfo, setShowInfo ] = useState( true )
-    const bigImgInfo = bigPhoto ? <><b>{bigPhoto.id}</b> {bigPhoto.insertDate.slice(0,10)} <b>{bigPhoto.header}</b> Autor: {bigPhoto.autor} 
-                                    <br />{bigPhoto.text}</>
-                                : null
+    
+    const bigImgInfo = bigPhoto && <>
+                                    <b>{bigPhoto.id}</b> {bigPhoto.insertDate.slice(0,10)} <b>{bigPhoto.header}</b> Autor: {bigPhoto.autor} 
+                                    <br />{bigPhoto.text}
+                                  </>
+                                
 
     return (
         <>
             { showInfo ? <div className="photoInfo">{bigImgInfo}</div> : null }
-            { showInfo ? <FontAwesomeIcon className="textOff" icon={ faCommentSlash }  onClick={ () => setShowInfo(false) }  />
-                       : <FontAwesomeIcon className="textOn" icon={ faCommentMedical } onClick={ () => setShowInfo(true) } /> }
+            { showInfo ? <FontAwesomeIcon className="textOff" icon={ faCommentSlash }   onClick={ () => setShowInfo(false) } />
+                       : <FontAwesomeIcon className="textOn"  icon={ faCommentMedical } onClick={ () => setShowInfo(true)  } /> }
         </>
     )
 }

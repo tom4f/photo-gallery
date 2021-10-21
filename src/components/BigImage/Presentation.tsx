@@ -20,7 +20,6 @@ export const Presentation = ( {setImgPosition, length}:eightPhotoTypes ) => {
         }, 5000 )
         setTimer( timer )
         setPresentation( true )
-        
     }
 
     const stopPresentation = () => {
@@ -29,10 +28,8 @@ export const Presentation = ( {setImgPosition, length}:eightPhotoTypes ) => {
     }
     return (
         <>
-            { presentation ? <FontAwesomeIcon className="stop" icon={ faStopCircle } onClick={ () => stopPresentation() } />
+            { presentation ? <FontAwesomeIcon className="stop" icon={ faStopCircle } onClick={ () => stopPresentation()  } />
                            : <FontAwesomeIcon className="play" icon={ faPlayCircle } onClick={ () => startPresentation() } /> }
         </>
     )
-
-
 }

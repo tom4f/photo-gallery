@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { changeType, editImage, LoginType } from './../../TypeDefinition'
+import { changeType, editImage, LoginType, categoryNameType, AlertType } from './../../TypeDefinition'
 import { Login } from './Login'
 import { Formular } from './Formular'
 import { serverPath, fotoGalleryOwner } from './../../api/read'
@@ -8,13 +8,7 @@ import { Delay }    from './AlertBox';
 
 export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition, categoryObj }: editImage ) => {
 
-    interface alertTypes {
-        header : string;
-        text   : string;
-        color? : string;
-    }
-
-    const [ alert, setAlert ] = useState<alertTypes>( { header: '', text: '' } );
+    const [ alert, setAlert ] = useState<AlertType>( { header: '', text: '' } );
     // if 'alert' changed - wait 5s and clear 'alert'
     Delay( alert, setAlert );
    
@@ -107,68 +101,47 @@ export const EditImage = ( { editPhoto, setEditPhoto, setImgPosition, categoryOb
             const id = JSON.parse(respId)[0].Auto_increment
             action === 'create' && FD.set('id', id)
 
-            
-            // const pairs = Array.from(FD.entries())
-
             const sendAction = await fetch( `${serverPath}/pdo_${action}_photogallery.php`, {
                 method: 'POST',
                 body: FD
             })
-            const respAction = await sendAction.text()
-            console.log('text: ' + respAction )
+            const respAction = await sendAction.json()
+            console.log( respAction.message )
 
             setAlert( { header: 'Hotovo', text: ':-)', color: 'lime' } )
             setImgPosition( old => ( { ...old, reload: ++old.reload } ) )
         }
         const submitCliked = (event.target as HTMLButtonElement).name
-        switch (submitCliked) {
-            case 'update':
-                ajax('update')
-                console.log(submitCliked)
-                break
-            
-            case 'delete':
-                console.log(submitCliked)
-                ajax('delete')
-                break
+        ajax( submitCliked )
 
-            case 'create':
-                console.log(submitCliked)
-                ajax('create')
-                break
-            }
- }
+    }
 
- const editCategoryLogic = (event: React.MouseEvent<HTMLInputElement>, formCategoryCurrent: HTMLFormElement | null):void => {
+ const editCategoryLogic = (event:React.MouseEvent<HTMLInputElement>, categoryName: categoryNameType | null):void => {
     event.preventDefault()
-    const ajax = async() => {
+    const ajax = async() => { 
 
-        if ( !formCategoryCurrent ) return 
+        if ( !categoryName ) return 
         setAlert( { header: 'Ukládám změny', text: 'malý moment...', color: 'lime' } )
 
-        const FD = new FormData(formCategoryCurrent)
-        
-        let object:{ [key: string]: string | File } = {}
+        console.log(' just save :-) ')
+        console.log(categoryName)
 
-        FD.forEach( (value, key) => {
 
-            if ( key.startsWith('index-') ) {
-                //key = key.replace('index-', '')
-            } else if ( key.startsWith('name-') ) {
-                key = key.replace('name-', '')
-                object[key] = value
+
+            let resp
+            try {
+                resp = await fetch( `${serverPath}/saveCategoryName.php`, {
+                    method: 'POST',
+                    body: JSON.stringify( {
+                        categoryName,
+                        fotoGalleryOwner
+                    })
+                })
+                console.log(resp)
+            } catch(err) {
+                console.log( { err } )
             }
 
-            
-
-
-        })
-        
-        
-        
-        FD.append('webToken' , loginData.webToken)
-
-        console.log(object)
     }
 
     ajax()

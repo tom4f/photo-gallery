@@ -11,9 +11,9 @@ import './BigImages.css'
 
 export const BigImage = ( {bigPhoto, imgPosition, setImgPosition, categoryObj, length}: BigImageType ) => {
 
-    const [ fadeIn, setFadeIn ] = useState( true )
+    const [ fadeIn, setFadeIn ]       = useState( true )
     const [ editPhoto, setEditPhoto ] = useState( bigPhoto )
-    const [ isEdit, setIsEdit] = useState( false )
+    const [ isEdit, setIsEdit]        = useState( false )
 
     useEffect( () => setIsEdit( editStatus ), [])
 
@@ -25,12 +25,11 @@ export const BigImage = ( {bigPhoto, imgPosition, setImgPosition, categoryObj, l
 
     return (
         <BigImg bigPhoto={bigPhoto} editPhoto={editPhoto} className={`main-img`} fadeIn={fadeIn} imgPosition={imgPosition}   >
-            <InfoText bigPhoto={bigPhoto} />
+            <InfoText     bigPhoto={bigPhoto} />
             <ChangeImage  setImgPosition={setImgPosition} length={length} imgPosition={imgPosition}  />
             <Presentation setImgPosition={setImgPosition} length={length} /> 
             <CategoryList setImgPosition={setImgPosition} categoryObj={categoryObj} />
-            { isEdit && <EditImage setImgPosition={setImgPosition} categoryObj={categoryObj}
-                                   editPhoto={editPhoto} setEditPhoto={setEditPhoto} /> }
+{ isEdit && <EditImage    setImgPosition={setImgPosition} categoryObj={categoryObj} editPhoto={editPhoto} setEditPhoto={setEditPhoto} /> }
         </BigImg>
     )
 }

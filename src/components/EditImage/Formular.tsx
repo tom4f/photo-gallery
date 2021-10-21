@@ -1,7 +1,7 @@
-import { formularType, photoType, categoryNameType } from './../../TypeDefinition'
+import { formularType, photoType, categoryNameType, categoryChangeType } from './../../TypeDefinition'
 import { useRef, useState, useEffect } from 'react'
 import { AlertBox } from './AlertBox'
-import { readCategoryList } from '../../api/read'
+import { readCategoryName } from '../../api/read'
 import './../BigImage/CategoryListEdit.css' 
 
 export const Formular = ({editPhoto, change, editLogic, editCategoryLogic, setEditPhoto, alert, setImgPosition, categoryObj} : formularType) => {
@@ -56,6 +56,15 @@ export const Formular = ({editPhoto, change, editLogic, editCategoryLogic, setEd
     }
 
 
+    const categoryChange = (e:categoryChangeType) => {
+        const { name, value } = e.target
+
+        if ( name.startsWith('name-') ) {
+            const key = name.replace('name-', '') 
+            setCategoryName( orig => ( { ...orig, [key]: value } ) )
+        }
+    } 
+
     const category = []
 
     for (const [key, value] of Object.entries( categoryObj ) ) {
@@ -64,7 +73,7 @@ export const Formular = ({editPhoto, change, editLogic, editCategoryLogic, setEd
             <div key={key} onClick={ changeCategory } className="oneLine">
                 <article>index-{ key }</article>
                 <div className="input_booking" style={{ width: '50%' }}>
-                    <input value={ categoryName?.[+key] }  name={`name-${key}`} placeholder="text" size={10} />
+                    <input value={ categoryName?.[+key] } onChange={ categoryChange }  name={`name-${key}`} placeholder="text" size={10} />
                 </div>
                 <article>{value}x</article>
             </div>
@@ -72,7 +81,13 @@ export const Formular = ({editPhoto, change, editLogic, editCategoryLogic, setEd
     }
 
     useEffect( () => {
-        ( async() => setCategoryName( await readCategoryList() ) )()
+        ( async() => {
+            const resp = await readCategoryName()
+            console.log( resp )
+            setCategoryName( resp )
+            
+        })()
+        
     }, [] )
 
     return (
@@ -89,7 +104,7 @@ isCategory ? <form ref={formCategory} name="formularCategory" >
                         <input type="Submit" onClick={event => editCategory(event)} name="delete" defaultValue="Zpět Foto" />
                     </div>
                     <div className="submit_booking red" style={{ backgroundColor: 'rgba(0, 256, 0, 0.4)' }}>
-                        <input type="Submit" onClick={event => editCategoryLogic(event, formCategory.current)} name="delete" defaultValue="Uložit" />
+                        <input type="Submit" onClick={event => editCategoryLogic(event, categoryName )} name="delete" defaultValue="Uložit" />
                     </div>
                     <div className="submit_booking red" style={{ backgroundColor: 'rgba(0, 0, 256, 0.4)' }}>
                         <input type="Submit" onClick={event => editCategory(event)} name="delete" defaultValue="Nová kat." />

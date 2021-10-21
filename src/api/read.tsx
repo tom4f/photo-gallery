@@ -38,13 +38,12 @@ export const loadPicturesfromMySQL1 = async () => {
 
 
 
-export const readCategoryList = async () => {
+export const readCategoryName = async () => {
     let respObj = {}
     try {
-        const resp = await fetch( `${serverPath}/readCategoryList.php?fotoGalleryOwner=${fotoGalleryOwner}`)
+        const resp = await fetch( `${serverPath}/readCategoryName.php?fotoGalleryOwner=${fotoGalleryOwner}`)
         const respText = await resp.text()
-        respObj = JSON.parse( respText )
-        console.log( respObj )
+        respObj = JSON.parse( respText )['categoryName']
     } catch(err) {
         console.log( { err } )
     }

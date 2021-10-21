@@ -22,16 +22,14 @@ export default function App() {
   const eightPhoto = filteredPhoto.slice(imgPosition.smallImgStart, imgPosition.smallImgStart + imgPosition.smallImgsSize)
   
   const reducer = (sumPerCat: categoryObjType, oneEntry: allPhotoType) => {
-      if ( !oneEntry.typ ) return sumPerCat
-      sumPerCat[oneEntry.typ] = (oneEntry.typ in sumPerCat)
-                              ? sumPerCat[+oneEntry.typ] + 1
+      sumPerCat[oneEntry.typ] = oneEntry.typ in sumPerCat
+                              ? ++sumPerCat[oneEntry.typ]
                               : 1
       return sumPerCat
   }
 
   const categoryObj: {[key: string]: number } = {
-      ...allPhoto.reduce(reducer, { 99999 : allPhoto.length } ),
-      
+      ...allPhoto.reduce(reducer, { 99999 : allPhoto.length } ) 
   }
 
   return (

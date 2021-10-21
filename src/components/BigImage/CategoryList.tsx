@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { setStateType, categoryObjType, categoryNameType } from './../../TypeDefinition'
-import { serverPath, readCategoryList } from './../../api/read'
+import { readCategoryName } from './../../api/read'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
 import './CategoryList.css'
@@ -26,23 +26,9 @@ export const CategoryList = ( { setImgPosition, categoryObj}: eightPhotoTypes ) 
         )
     }
 
-    const saveCategoryList = async () => {
-        let resp
-        try {
-            resp = await fetch( `${serverPath}/saveCategoryList.php`, {
-                method: 'POST',
-                body: JSON.stringify( categoryName )
-            })
-            console.log(resp)
-        } catch(err) {
-            console.log( { err } )
-        }
-        return resp
-    }
-
-    
+   
     useEffect( () => {
-        ( async() => setCategoryName( await readCategoryList() ) )()
+        ( async() => setCategoryName( await readCategoryName() ) )()
     }, [] )
 
     return (
