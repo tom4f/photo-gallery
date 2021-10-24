@@ -43,23 +43,52 @@ export type SmallImagesTypes = {
     arrIndexFromImgId : (clickedId:number) => number;
 }
 
-type changeTypeFunction  = ( e:changeType ) => void
-
 export type AlertType = {
     header : string;
     text   : string;
     color? : string;
 }
 
+type setImgPositionType = React.Dispatch<React.SetStateAction<{
+    smallImgStart: number;
+    smallImgsSize: number;
+    current: number;
+    category: number;
+    reload: number;
+}>>
+
+export type editLogicType = (
+    event          : React.MouseEvent<HTMLInputElement>,
+    formCurrent    : HTMLFormElement | null,
+    setAlert       : React.Dispatch<React.SetStateAction<AlertType>>,
+    loginData      : any,
+    setImgPosition : setImgPositionType
+) => Promise<void>
+
 export type formularType = {
     editPhoto        : photoType;
     setEditPhoto     : Dispatch<SetStateAction<photoType>>;
-    change           : changeTypeFunction;
-    editLogic        : (event:React.MouseEvent<HTMLInputElement>, formCurrent: HTMLFormElement | null) => void;
-    editCategoryLogic: (event:React.MouseEvent<HTMLInputElement>, categoryName: categoryNameType | null) => void;
-    alert            : AlertType;
     setImgPosition   : setStateType;
     categoryObj      : categoryObjType;
+    loginData        : any;
+}
+
+export type editCategoryLogicType = ( 
+    event       : React.MouseEvent<HTMLInputElement>,
+    categoryName: categoryNameType | null, 
+    setAlert    : React.Dispatch<React.SetStateAction<AlertType>>
+) => Promise<void>
+
+export type addCategoryLogicType = ( 
+    event          : React.MouseEvent<HTMLInputElement>,
+    setCategoryName: React.Dispatch<React.SetStateAction<categoryNameType | null>>
+) => Promise<void>
+
+export type EditCategoryType = {
+    categoryObj    : categoryObjType;
+    setImgPosition : setStateType;
+    editCategory   : (event: React.MouseEvent<HTMLInputElement>) => void
+
 }
 
 export type editImage = {
@@ -67,6 +96,10 @@ export type editImage = {
     setEditPhoto   : Dispatch<SetStateAction<photoType>>;
     setImgPosition : setStateType;
     categoryObj    : categoryObjType;
+}
+
+export type imageChangeType = {
+    setEditPhoto: React.Dispatch<React.SetStateAction<photoType>>
 }
 
 export type BigImageType = {
@@ -78,6 +111,18 @@ export type BigImageType = {
     setAllPhoto    : React.Dispatch<React.SetStateAction<photoType[]>>
 }
 
+export type loginLogicType = (
+    event: React.FormEvent<HTMLFormElement>,
+    formCurrent: HTMLFormElement | null,
+    setAlert    : React.Dispatch<React.SetStateAction<AlertType>>,
+    setLoginData: any
+) => Promise<void>
+
 export type LoginType = {
-    (event: React.FormEvent<HTMLFormElement>, formCurrent: HTMLFormElement | null): Promise<void>
+    setLoginData: React.Dispatch<React.SetStateAction<{
+        isLogged: boolean;
+        webToken: string;
+        webAccess: string;
+        webUser: string;
+    }>>
 }

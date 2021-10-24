@@ -1,13 +1,18 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { LoginType, AlertType } from './../../TypeDefinition'
-import { AlertBox } from './AlertBox'
+import { AlertBox, Delay } from './AlertBox'
+import { loginLogic } from './logic/loginLogic'
 
-export const Login = ( {login, alert}: {login: LoginType, alert: AlertType} ) => {
+export const Login = ( {setLoginData}: LoginType ) => {
+
+    const [ alert, setAlert ] = useState<AlertType>( { header: '', text: '' } );
+    // if 'alert' changed - wait 5s and clear 'alert'
+    Delay( alert, setAlert );
 
     const form = useRef<HTMLFormElement>(null)
 
     return (
-        <form ref={form} onSubmit={ event => login(event, form.current ) } name="login">
+        <form ref={form} onSubmit={ event => loginLogic(event, form.current, setAlert, setLoginData ) } name="login">
             <div className="form_booking">
                 <div className="input_booking">
                     <label>Zadejte uživatelské jméno</label>

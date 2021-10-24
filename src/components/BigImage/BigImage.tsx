@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { CategoryList } from './CategoryList'
-import { BigImageType } from './../../TypeDefinition';
+import { BigImageType } from '../../TypeDefinition';
 import { Presentation } from './Presentation'
 import { ChangeImage } from './ChangeImage'
 import { InfoText } from './InfoText'
-import { EditImage } from './../EditImage';
+import { EditImage } from './../EditImage/EditImage';
 import { BigImg } from './BigImg.styled' 
 import { editStatus } from '../../api/read';
 import './BigImages.css'

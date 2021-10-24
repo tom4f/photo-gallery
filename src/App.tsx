@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './css/App.css';
 import { loadPicturesfromMySQL } from './api/read'
 import { SmallImages } from './components/SmallImages'
-import { BigImage } from './components/BigImage'
+import { BigImage } from './components/BigImage/BigImage'
 import { allPhotoType, categoryObjType } from './TypeDefinition';
 
 export default function App() {
