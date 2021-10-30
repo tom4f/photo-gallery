@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react"
-import { AlertType, categoryNameType, EditCategoryType, categoryChangeType } from './../../TypeDefinition'
+import { useState } from "react"
+import { AlertType, EditCategoryType, categoryChangeType } from './../../TypeDefinition'
 import { AlertBox, Delay } from './AlertBox'
-import { readCategoryName } from '../../api/read'
 import { editCategoryLogic, addCategoryLogic } from './logic/editCategoryLogic'
 
-export const EditCategory = ( {categoryObj, setImgPosition, editCategory}: EditCategoryType ) => {
+export const EditCategory = ( {categoryName, setCategoryName, categoryObj, setImgPosition, editCategory}: EditCategoryType ) => {
 
-    const [ categoryName, setCategoryName ] = useState<categoryNameType | null>( null )
     const [ alert, setAlert ] = useState<AlertType>( { header: '', text: '' } );
     Delay( alert, setAlert );
 
@@ -31,8 +29,6 @@ export const EditCategory = ( {categoryObj, setImgPosition, editCategory}: EditC
             </div>
         )
     }
-
-    useEffect( () => { ( async() => setCategoryName( await readCategoryName() ) )() }, [] )
 
     return (
         <form name="formularCategory" >

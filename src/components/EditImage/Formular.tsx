@@ -1,13 +1,15 @@
-import { formularType, changeType, AlertType } from './../../TypeDefinition'
-import { useRef, useState } from 'react'
+import { formularType, changeType, AlertType, categoryNameType } from './../../TypeDefinition'
+import { useRef, useState, useEffect } from 'react'
 import { AlertBox, Delay } from './AlertBox'
 import './../BigImage/CategoryListEdit.css'
 import { editLogic } from './logic/editLogic'
 import { EditCategory } from './EditCategory'
 import { ImageChange } from './ImageChange'
+import { readCategoryName } from '../../api/read'
 
 export const Formular = ({editPhoto, setEditPhoto, setImgPosition, categoryObj, loginData} : formularType) => {
 
+    const [ categoryName, setCategoryName ] = useState<categoryNameType | null>( null )
     const [ alert, setAlert ] = useState<AlertType>( { header: '', text: '' } );
     Delay( alert, setAlert );
 
@@ -19,11 +21,26 @@ export const Formular = ({editPhoto, setEditPhoto, setImgPosition, categoryObj, 
     
     const change = (e:changeType) =>  setEditPhoto( orig => ( { ...orig, [e.target.name]: e.target.value } ) )
     
+    useEffect( () => { ( async() => setCategoryName( await readCategoryName() ) )() }, [] )
+
     const form = useRef<HTMLFormElement>(null)
+
+    const category = []
+    if ( categoryName ) { 
+        let newFirstFreeKey = 0
+        for ( const [ key, value ] of Object.entries( categoryName ) ) {  
+            if (key !== '99999') {
+                category.push( <option key={key} value={key}>{value}</option> )
+                newFirstFreeKey = (+key) + 1 
+            }
+        }
+        category.push( <option key={ newFirstFreeKey } value={ newFirstFreeKey }>nová kategorie</option> )
+    }
+
 
     return (
         isCategory
-           ? <EditCategory categoryObj={categoryObj} setImgPosition={setImgPosition} editCategory={editCategory} /> 
+           ? <EditCategory categoryName={categoryName} setCategoryName={setCategoryName} categoryObj={categoryObj} setImgPosition={setImgPosition} editCategory={editCategory} /> 
 
            : <form ref={form} name="formular" >
                 <div className="form_booking" >
@@ -37,16 +54,7 @@ export const Formular = ({editPhoto, setEditPhoto, setImgPosition, categoryObj, 
                         <label>Kategorie</label>
                         <select value={ editPhoto?.typ ?? '' } onChange={ change } name="typ">
                             <option value="" >--- vyber kategorii</option>
-                            <option value="0">Ubytování</option>
-                            <option value="1">Lipenská přehrada</option>
-                            <option value="2">Příroda</option>
-                            <option value="3">Obce</option>
-                            <option value="4">Historie</option>
-                            <option value="5">Sport</option>
-                            <option value="6">Ostatní</option>
-                            <option value="7">Všechny</option>
-                            <option value="10">Kaliště - kniha</option>
-                            <option value="11">Kaliště</option>
+                            {category}
                         </select>
                     </div>
                     <div className="input_booking" style={{ width: '40%' }}>

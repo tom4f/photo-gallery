@@ -26,10 +26,7 @@ export const CategoryList = ( { setImgPosition, categoryObj}: eightPhotoTypes ) 
         )
     }
 
-   
-    useEffect( () => {
-        ( async() => setCategoryName( await readCategoryName() ) )()
-    }, [] )
+    useEffect( () => { ( async() => setCategoryName( await readCategoryName() ) )() }, [] )
 
     return (
         <>

@@ -20,10 +20,7 @@ export const editLogic: editLogicType = async(event, formCurrent, setAlert, logi
     FD.append('webAccess', loginData.webAccess)
     FD.append('webUser'  , loginData.webUser)
     
-    const getId = await fetch( `${serverPath}/pdo_read_auto_increment.php`, {
-        method: 'POST',
-        body: JSON.stringify({ 'fotoGalleryOwner' : fotoGalleryOwner})
-    })
+    const getId = await fetch( `${serverPath}/pdo_read_auto_increment.php?fotoGalleryOwner=${fotoGalleryOwner}`)
     const respId = await getId.text()
     const id = JSON.parse(respId)[0].Auto_increment
     action === 'create' && FD.set('id', id)

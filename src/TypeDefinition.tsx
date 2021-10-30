@@ -85,10 +85,11 @@ export type addCategoryLogicType = (
 ) => Promise<void>
 
 export type EditCategoryType = {
-    categoryObj    : categoryObjType;
-    setImgPosition : setStateType;
-    editCategory   : (event: React.MouseEvent<HTMLInputElement>) => void
-
+    categoryObj     : categoryObjType;
+    setImgPosition  : setStateType;
+    editCategory    : (event: React.MouseEvent<HTMLInputElement>) => void;
+    setCategoryName : React.Dispatch<React.SetStateAction<categoryNameType | null>>
+    categoryName    : { [key: string]: string } | null;
 }
 
 export type editImage = {

@@ -22,7 +22,7 @@ export const serverPath = dev ? 'http://localhost/lipnonet/rekreace/api' : './..
 
 export const imgFolder = dev ? `http://localhost/lipnonet/rekreace/fotogalerie${fotoGalleryOwner}` : `./../fotogalerie${fotoGalleryOwner}`
 
-export const loadPicturesfromMySQL = () => fetch( `${serverPath}/pdo_read_foto${fotoGalleryOwner}.php` )
+export const loadPicturesfromMySQL = () => fetch( `${serverPath}/pdo_read_foto.php?fotoGalleryOwner=${fotoGalleryOwner}` )
                                         .then(  response => response.json() )
                                         .catch( response => console.log( { response } ) )
 
@@ -36,8 +36,6 @@ export const loadPicturesfromMySQL1 = async () => {
     return resp
 }
 
-
-
 export const readCategoryName = async () => {
     let respObj = {}
     try {
@@ -49,18 +47,3 @@ export const readCategoryName = async () => {
     }
     return respObj
 }
-
-
-/* export const categoryName:{ [key: number]: string } = { 
-    0  : 'Ubytování',
-    1  : 'Lipenská přehrada',
-    2  : 'Příroda',
-    3  : 'Obce',
-    4  : 'Historie',
-    5  : 'Sport',
-    6  : 'Ostatní',
-    10 : 'Kaliště - kniha',
-    11 : 'Kaliště',
-    99999 : 'Všechny'
-} */
-
